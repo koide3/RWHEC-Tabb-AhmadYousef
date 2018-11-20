@@ -29,7 +29,7 @@ using namespace std;
 
 
 int RobotWorldHandEyeCalibration(double square_mm_height, double square_mm_width,
-		int chess_h, int chess_w, string source_dir, string write_dir,  bool do_camcali, bool do_rwhec, bool do_reconstruction, bool verbose);
+		int chess_h, int chess_w, int chess_acircles, string source_dir, string write_dir,  bool do_camcali, bool do_rwhec, bool do_reconstruction, bool verbose);
 
 void WriteCaliFile(CaliObjectOpenCV2* CO, std::ofstream& out);
 

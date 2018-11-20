@@ -12,7 +12,7 @@
 
 using namespace cv;
 
-CaliObjectOpenCV2::CaliObjectOpenCV2(int i, int w, int h,  double s_w_i, double s_h_i){
+CaliObjectOpenCV2::CaliObjectOpenCV2(int i, int w, int h,  double s_w_i, double s_h_i, int chess_acircles){
 
 	chess_w = w;
 	chess_h = h;
@@ -20,6 +20,7 @@ CaliObjectOpenCV2::CaliObjectOpenCV2(int i, int w, int h,  double s_w_i, double 
 	mean_reproj_error = 0;
 	mm_height = s_h_i;
 	mm_width = s_w_i;
+	this->chess_acircles = chess_acircles;
 	image_size =  cv::Size(0, 0);
 	text_file = "";
 
@@ -412,7 +413,12 @@ void CaliObjectOpenCV2::Calibrate(std::ofstream& out, string write_directory){
 	int counter = 0;
 	for( int i = 0; i < chess_h; ++i ){
 		for( int j = 0; j < chess_w; ++j, counter++ ){
-			corners[counter] = (cv::Point3f(float( j*mm_width ), float( i*mm_height ), 0));
+			if( chess_acircles ) {
+				double y_offset = i % 2 == 0 ? 0 : mm_height / 2;
+				corners[counter] = cv::Point3f(j * mm_width, i * mm_height + y_offset, 0);
+			} else {
+				corners[counter] = (cv::Point3f(float( j*mm_width ), float( i*mm_height ), 0));
+			}
 		}
 	}
 

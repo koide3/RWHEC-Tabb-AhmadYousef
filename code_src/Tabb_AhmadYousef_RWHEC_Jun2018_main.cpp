@@ -55,6 +55,7 @@ int main(int argc, char** argv) {
 	double chess_mm_width = 0;
 	int chess_height = 0;
 	int chess_width = 0;
+	int chess_acircles = 0;
 	int flag;
 	bool do_camcali = true;
 	bool do_rwhec = true;
@@ -106,16 +107,17 @@ int main(int argc, char** argv) {
 	in >> temp >> chess_mm_width;
 	in >> temp >> chess_height;
 	in >> temp >> chess_width;
+	in >> temp >> chess_acircles;
 	in.close();
 
-	RobotWorldHandEyeCalibration(chess_mm_width, chess_mm_height, chess_height, chess_width, source_dir, write_dir, do_camcali, do_rwhec, do_reconstruction, VERBOSE);
+	RobotWorldHandEyeCalibration(chess_mm_width, chess_mm_height, chess_height, chess_width, chess_acircles, source_dir, write_dir, do_camcali, do_rwhec, do_reconstruction, VERBOSE);
 
 	return 0;
 }
 
 
 int RobotWorldHandEyeCalibration(double square_mm_height, double square_mm_width,
-		int chess_h, int chess_w, string source_dir, string write_dir, bool do_camcali, bool do_rwhec, bool do_reconstruction, bool verbose){
+		int chess_h, int chess_w, int chess_acircles, string source_dir, string write_dir, bool do_camcali, bool do_rwhec, bool do_reconstruction, bool verbose){
 
 	string command;
 	//int ret;
@@ -162,7 +164,7 @@ int RobotWorldHandEyeCalibration(double square_mm_height, double square_mm_width
 			out.open(filename.c_str());
 
 			COs.push_back(CaliObjectOpenCV2(0, chess_w, chess_h,
-					square_mm_width, square_mm_height));
+					square_mm_width, square_mm_height, chess_acircles));
 
 			external_dir = source_dir + "/images/" + camera_names[k] ;
 			internal_dir = source_dir + "/internal_images/" + camera_names[k];
@@ -291,7 +293,7 @@ int RobotWorldHandEyeCalibration(double square_mm_height, double square_mm_width
 				in.open(filename.c_str());
 
 				COs.push_back(CaliObjectOpenCV2(0, chess_w, chess_h,
-						square_mm_width, square_mm_height));
+						square_mm_width, square_mm_height, chess_acircles));
 
 				external_dir = source_dir + "/images/" + camera_names[k] ;
 				internal_dir = source_dir + "/internal_images/" + camera_names[k];

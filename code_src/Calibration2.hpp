@@ -37,6 +37,7 @@ public:
 	double mm_height;
 	int chess_w;
 	int chess_h;
+	int chess_acircles;
 	double mean_reproj_error;
 	double mean_ext_reproj_error;
 
@@ -66,7 +67,7 @@ public:
 
 	string text_file;
 
-	CaliObjectOpenCV2(int i, int w, int h, double s_w_i, double s_h_i);
+	CaliObjectOpenCV2(int i, int w, int h, double s_w_i, double s_h_i, int chess_acircles);
 
 	void ReadImages(string internal_dir, bool flag);
 
