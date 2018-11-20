@@ -94,7 +94,11 @@ bool CaliObjectOpenCV2::AccumulateCorners(bool draw_corners){
 		// This is a difference in between OpenCV current version and past.
 		//corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_FAST_CHECK | CV_CALIB_CB_NORMALIZE_IMAGE | CV_CALIB_CB_FILTER_QUADS);
 		/// Current version -- Opencv 3.4.0
-		corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE + CALIB_CB_FAST_CHECK + CALIB_CB_FILTER_QUADS);
+		if (chess_acircles) {
+			corner_found = cv::findCirclesGrid(gimage, boardsize, pointBuf, CALIB_CB_ASYMMETRIC_GRID);
+		} else {
+			corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE + CALIB_CB_FAST_CHECK + CALIB_CB_FILTER_QUADS);
+		}
 
 		if (corner_found) {
 
@@ -145,7 +149,11 @@ bool CaliObjectOpenCV2::AccumulateCorners(bool draw_corners){
 		/// < OpenCV 3.4.0
 		//corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_FAST_CHECK | CV_CALIB_CB_NORMALIZE_IMAGE | CV_CALIB_CB_FILTER_QUADS);
 		/// Current version -- Opencv 3.4.0
-		corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE + CALIB_CB_FAST_CHECK + CALIB_CB_FILTER_QUADS);
+		if (chess_acircles) {
+			corner_found = cv::findCirclesGrid(gimage, boardsize, pointBuf, CALIB_CB_ASYMMETRIC_GRID);
+		} else {
+			corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE + CALIB_CB_FAST_CHECK + CALIB_CB_FILTER_QUADS);
+		}
 
 		if (!corner_found){
 			cout << "Trying default option " << endl;
@@ -255,7 +263,11 @@ bool CaliObjectOpenCV2::AccumulateCornersFlexibleExternal(bool draw_corners){
 		// < OpenCV 3.4
 		//corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_FAST_CHECK | CV_CALIB_CB_NORMALIZE_IMAGE | CV_CALIB_CB_FILTER_QUADS);
 		// OpenCV version differences
-		corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE + CALIB_CB_FAST_CHECK + CALIB_CB_FILTER_QUADS);
+		if (chess_acircles) {
+			corner_found = cv::findCirclesGrid(gimage, boardsize, pointBuf, CALIB_CB_ASYMMETRIC_GRID);
+		} else {
+			corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE + CALIB_CB_FAST_CHECK + CALIB_CB_FILTER_QUADS);
+		}
 
 		if (corner_found) {
 
@@ -311,7 +323,11 @@ bool CaliObjectOpenCV2::AccumulateCornersFlexibleExternal(bool draw_corners){
 
 		//corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_FAST_CHECK | CV_CALIB_CB_NORMALIZE_IMAGE | CV_CALIB_CB_FILTER_QUADS);
 		// OpenCV version differences
-		corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE + CALIB_CB_FAST_CHECK + CALIB_CB_FILTER_QUADS);
+		if (chess_acircles) {
+			corner_found = cv::findCirclesGrid(gimage, boardsize, pointBuf, CALIB_CB_ASYMMETRIC_GRID);
+		} else {
+			corner_found = cv::findChessboardCorners(gimage, boardsize, pointBuf,  CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE + CALIB_CB_FAST_CHECK + CALIB_CB_FILTER_QUADS);
+		}
 
 		if (!corner_found){
 			cout << "Trying default option " << endl;
